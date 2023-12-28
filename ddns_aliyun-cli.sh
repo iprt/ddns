@@ -10,6 +10,16 @@ RR=$1
 DOMAIN=$2
 ip_cache=$3
 
+function validate_cli() {
+  default_valid_status=$(aliyun configure list | grep default | awk -F '|' '{print $3}' | xargs)
+  if [ "$default_valid_status" == "Valid" ]; then
+    /bin/bash log.sh "validate_cli" "阿里云CLI 配置失败"
+    exit
+  else
+    /bin/bash log.sh "validate_cli" "阿里云CLI 配置成功"
+  fi
+}
+
 # 注意 方法内部不能加echo 加了注释输出的内容 jq 读取有问题
 function DescribeSubDomainRecords() {
   # shellcheck disable=SC2086
