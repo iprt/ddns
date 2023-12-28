@@ -4,9 +4,15 @@
 
 解析IPV4
 
-## 准备条件
+## 一、准备条件
 
-### linux 需要的命令行
+### 1.1 `git clone`
+
+```shell
+git clone https://github.com/iprt/ddns
+```
+
+### 1.2 其他需要的命令
 
 `nc`: 测试远程tcp端口是否打开
 
@@ -16,7 +22,7 @@
 
 `jq`: 解析`aliyun-cli`的`json`返回值
 
-### aliyun-cli 配置
+### 1.3 aliyun-cli 配置
 
 ```shell
 aliyun configure 
@@ -50,7 +56,7 @@ Configure Done!!!
 - `Default Region Id`: `cn-shanghai`
 - `Default Language`: `zh`
 
-## 使用说明
+## 二、使用说明
 
 例子: 修改 `test.example.com` , `test` 为dns记录 ，`example.com` 为域名
 
@@ -73,18 +79,29 @@ crontab -e
  */5 * * * * /bin/bash /path_to_ddns/ddns.sh test example.com 
 ```
 
-## 自定义 `ip_get.sh`
+## 三、自定义 `ip_get.sh`
 
-<font color=red>约定: </font>获取到的`公网ip（类似 127.0.0.1 ）`写入到`ip_get.cache`文件中，`ip_cache.sh`会读取、校验、删除
+**约定:** 获取到的`公网ip（类似 127.0.0.1 ）`写入到`ip_get.cache`文件中，`ip_cache.sh`会读取、校验、删除
 
 一些 `ip_get.sh` 的实现
 
 - 参考 [ip_get](ip_get)
 
-## 脚本生成的文件
+## 四、脚本生成的文件
 
 缓存文件: `ip.cache`
 
 临时缓存: `ip_get.cache`
 
 日志文件: `ddns.log`
+
+## 五、一些其他配置
+
+`nginx` 配置获取 `/ddns` 获取 IP
+
+```nginx configuration
+    location = /ddns {
+        default_type text/plain;
+        return 200 '$remote_addr';
+    }
+```
