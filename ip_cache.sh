@@ -38,7 +38,7 @@ function cache_refresh() {
     # 公网IP验证失败
     exit 1
   else
-    /bin/bash log.sh "cache_refresh" "清理$ip_get_cache：rm -rf $ip_get_cache"
+    /bin/bash log.sh "cache_refresh" "清理$ip_get_cache: rm -rf $ip_get_cache"
     rm -rf $ip_get_cache
   fi
 

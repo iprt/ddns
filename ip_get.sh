@@ -22,5 +22,5 @@ function check_port() {
 # 测试需要获取ip的服务器端口是否打开
 check_port ipcrystal.com 443
 
-# 约定：写入 ip_get.cache
+# 约定: 写入 ip_get.cache
 curl -k https://ipcrystal.com/ddns >ip_get.cache

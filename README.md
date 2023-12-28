@@ -46,7 +46,7 @@ Configure Done!!!
 ```
 
 - `Access Key Id`: 略
-- `Access Key Secret`：略
+- `Access Key Secret`:略
 - `Default Region Id`: `cn-shanghai`
 - `Default Language`: `zh`
 
@@ -69,7 +69,7 @@ Configure Done!!!
 
 ## 执行
 
-例子：修改 `test.example.com` , `test` 为dns记录 ，`example.com` 为域名
+例子: 修改 `test.example.com` , `test` 为dns记录 ，`example.com` 为域名
 
 ```shell
 /bin/bash /path_to_ddns/ddns.sh test example.com 
@@ -81,7 +81,7 @@ Configure Done!!!
 crontab -e
 ```
 
-例子：每5分钟执行一次[`ddns.sh`](ddns.sh)，修改 `test.example.com` , `test` 为dns记录 ，`example.com` 为域名
+例子: 每5分钟执行一次[`ddns.sh`](ddns.sh)，修改 `test.example.com` , `test` 为dns记录 ，`example.com` 为域名
 
 ```text
  */5 * * * * /bin/bash /path_to_ddns/ddns.sh test example.com 
@@ -91,6 +91,6 @@ crontab -e
 
 缓存文件: `ip.cache`
 
-临时缓存：`ip_get.cache`
+临时缓存: `ip_get.cache`
 
 日志文件: `ddns.log`

@@ -16,7 +16,7 @@ function DescribeSubDomainRecords() {
   aliyun alidns DescribeSubDomainRecords --SubDomain $RR.$DOMAIN
 }
 
-# 验证方法：删除所有DNS记录
+# 验证方法: 删除所有DNS记录
 function AddDomainRecord() {
   /bin/bash log.sh "AddDomainRecord" "========== AddDomainRecord =========="
   /bin/bash log.sh "AddDomainRecord" "aliyun alidns AddDomainRecord --DomainName $DOMAIN --RR $RR --Type A --Value $ip_cache"
@@ -40,7 +40,7 @@ function DeleteSubDomainRecords() {
   aliyun alidns DeleteSubDomainRecords --RR $RR --DomainName $DOMAIN
 }
 
-# 验证方法: 更新DNS记录
+# 验证方法: DNS记录更新成其他IP
 function UpdateDomainRecord() {
   /bin/bash log.sh "UpdateDomainRecord" "========== UpdateDomainRecord =========="
 
