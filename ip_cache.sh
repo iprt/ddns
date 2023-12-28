@@ -17,6 +17,12 @@ function cache_refresh() {
   fi
 
   /bin/bash ip_get.sh
+
+  if [ ! -f $ip_get_cache ]; then
+    /bin/bash log.sh "cache_refresh" "$ip_get_cache 临时缓存文件不存在，确保 ip_get.sh 生成 $ip_get_cache 文件"
+    exit 1
+  fi
+
   # 获取公网IP 从 ip_get.cache 中获取
   # shellcheck disable=SC2155
   local public_ip=$(cat $ip_get_cache)

@@ -2,6 +2,8 @@
 
 基于阿里云
 
+解析IPV4
+
 ## 准备条件
 
 ### linux 需要的命令行
@@ -59,7 +61,7 @@ Configure Done!!!
 
 ## 自定义 `ip_get.sh`
 
-<font color=red>约定: </font>获取到的`公网ip`写入到`ip_get.cache`中，`ip_cache.sh`会读取、校验、删除
+<font color=red>约定: </font>获取到的`公网ip（类似 127.0.0.1 ）`写入到`ip_get.cache`文件中，`ip_cache.sh`会读取、校验、删除
 
 一些 `ip_get.sh` 的实现
 
@@ -88,5 +90,7 @@ crontab -e
 ## 脚本生成的文件
 
 缓存文件: `ip.cache`
+
+临时缓存：`ip_get.cache`
 
 日志文件: `ddns.log`
