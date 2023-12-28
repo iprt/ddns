@@ -1,0 +1,54 @@
+#!/bin/bash
+# shellcheck disable=SC2164
+SHELL_FOLDER=$(
+  cd "$(dirname "$0")"
+  pwd
+)
+cd "$SHELL_FOLDER"
+
+ip_get_cache="ip_get.cache"
+ip_cache="ip.cache"
+
+function cache_refresh() {
+  /bin/bash log.sh "cache_refresh" "========== cache_refresh =========="
+  if [ ! -f "$ip_cache" ]; then
+    /bin/bash log.sh "cache_refresh" "新建 $ip_cache 缓存文件"
+    echo "127.0.0.1" >"$ip_cache"
+  fi
+
+  /bin/bash ip_get.sh
+  # 获取公网IP 从 ip_get.cache 中获取
+  # shellcheck disable=SC2155
+  local public_ip=$(cat $ip_get_cache)
+
+  # 验证 公网IP是否正确
+  /bin/bash ip_valid.sh "$public_ip"
+  ip_valid_status=$?
+
+  /bin/bash log.sh "cache_refresh" "ip_valid_status $ip_valid_status"
+
+  # shellcheck disable=SC2086
+  if [ $ip_valid_status -ne 0 ]; then
+    # 公网IP验证失败
+    exit 1
+  else
+    /bin/bash log.sh "cache_refresh" "清理$ip_get_cache：rm -rf $ip_get_cache"
+    rm -rf $ip_get_cache
+  fi
+
+  # shellcheck disable=SC2155
+  local local_ip_cache=$(cat $ip_cache)
+
+  if [ "init" == "$local_ip_cache" ]; then
+    /bin/bash log.sh "cache_refresh" "ip cache 初始化，第一次写入$ip_cache"
+    echo "$public_ip" >$ip_cache
+  elif [ "$local_ip_cache" == "$public_ip" ]; then
+    /bin/bash log.sh "cache_refresh" "缓存的IP与当前的IP相同，ddns 执行时可选择重新校验"
+  else
+    /bin/bash log.sh "cache_refresh" "重写本地IP缓存，之前的IP缓存为: $local_ip_cache,新的缓存为: $public_ip"
+    echo "$public_ip" >$ip_cache
+  fi
+
+}
+
+cache_refresh
