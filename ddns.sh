@@ -10,17 +10,21 @@ cd "$SHELL_FOLDER"
 RR=$1
 DOMAIN=$2
 
-if [ -z "$RR" ]; then
-  /bin/bash log.sh "ddns.sh" "主机记录 不能为空"
-  exit
-fi
-
-if [ -z "$DOMAIN" ]; then
-  /bin/bash log.sh "ddns.sh" "域名 不能为空"
-  exit
-fi
-
 /bin/bash log.sh "ddns.sh" ">>> dynamic dns start <<<"
+
+function verify_param() {
+  if [ -z "$RR" ]; then
+    /bin/bash log.sh "ddns.sh" "主机记录 不能为空"
+    exit
+  fi
+
+  if [ -z "$DOMAIN" ]; then
+    /bin/bash log.sh "ddns.sh" "域名 不能为空"
+    exit
+  fi
+}
+
+verify_param
 
 # shellcheck disable=SC2034
 /bin/bash ip_cache.sh
@@ -34,8 +38,7 @@ fi
 
 ip_cache=$(cat ip.cache)
 
-# ========== ========== ========== ========== ========== ========== ========== ========== ========== ==========
-
+# aliyun-cli 操作 dns记录
 # shellcheck disable=SC2086
 /bin/bash ddns_aliyun-cli.sh $RR $DOMAIN $ip_cache
 
