@@ -10,7 +10,7 @@ RR=$1
 DOMAIN=$2
 ip_cache=$3
 
-# 注意 方法内部不能加注释 加了注释输出的内容 jq 读取有问题
+# 注意 方法内部不能加echo 加了注释输出的内容 jq 读取有问题
 function DescribeSubDomainRecords() {
   # shellcheck disable=SC2086
   aliyun alidns DescribeSubDomainRecords --SubDomain $RR.$DOMAIN
