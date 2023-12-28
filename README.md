@@ -6,11 +6,13 @@
 
 ### linux 需要的命令行
 
-`nc` 测试远程tcp端口是否打开
+`nc`: 测试远程tcp端口是否打开
 
 `curl`
 
 `aliyun-cli`: https://github.com/aliyun/aliyun-cli
+
+`jq`: 解析`aliyun-cli`的`json`返回值
 
 ### aliyun-cli 配置
 
