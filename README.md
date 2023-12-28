@@ -52,28 +52,14 @@ Configure Done!!!
 
 ## 使用说明
 
-```text
-/bin/bash ddns.sh test example.com
-```
-
-- 第一个参数 `test`: DNS记录
-- 第二个参数 `ipcrystal.com`: 域名
-
-## 自定义 `ip_get.sh`
-
-<font color=red>约定: </font>获取到的`公网ip（类似 127.0.0.1 ）`写入到`ip_get.cache`文件中，`ip_cache.sh`会读取、校验、删除
-
-一些 `ip_get.sh` 的实现
-
-- 参考 [ip_get](ip_get)
-
-## 执行
-
 例子: 修改 `test.example.com` , `test` 为dns记录 ，`example.com` 为域名
 
 ```shell
 /bin/bash /path_to_ddns/ddns.sh test example.com 
 ```
+
+- 第一个参数 `test`: DNS记录
+- 第二个参数 `example.com`: 域名
 
 **定时任务**
 
@@ -86,6 +72,14 @@ crontab -e
 ```text
  */5 * * * * /bin/bash /path_to_ddns/ddns.sh test example.com 
 ```
+
+## 自定义 `ip_get.sh`
+
+<font color=red>约定: </font>获取到的`公网ip（类似 127.0.0.1 ）`写入到`ip_get.cache`文件中，`ip_cache.sh`会读取、校验、删除
+
+一些 `ip_get.sh` 的实现
+
+- 参考 [ip_get](ip_get)
 
 ## 脚本生成的文件
 
