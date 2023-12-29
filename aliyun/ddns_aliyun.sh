@@ -100,6 +100,5 @@ function dynamic_dns() {
 
 dynamic_dns
 
-/bin/bash ../log.sh "show" "查询域名 $RR.$DOMAIN 的所有DNS记录"
 show_result=$(DescribeSubDomainRecords)
-/bin/bash ../log.sh "show" "\n$show_result"
+/bin/bash ../log.sh "show" "查询域名 $RR.$DOMAIN 的所有DNS记录\n$show_result"
