@@ -14,7 +14,7 @@ function DeleteSubDomainRecords() {
   /bin/bash ../log.sh "DeleteSubDomainRecords" "========== DeleteSubDomainRecords =========="
 
   # shellcheck disable=SC2051
-  for RecordId in $(DescribeSubDomainRecords | jq -r ".DomainRecords.Record[].RecordId"); do
+  for RecordId in $(/bin/bash DescribeSubDomainRecords.sh | jq -r ".DomainRecords.Record[].RecordId"); do
     /bin/bash ../log.sh "DeleteSubDomainRecords" "delete RecordId : RecordId=$RecordId"
   done
 
