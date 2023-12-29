@@ -15,11 +15,13 @@ DOMAIN=$2
 function verify_param() {
   if [ -z "$RR" ]; then
     /bin/bash log.sh "ddns.sh" "主机记录 不能为空"
+    /bin/bash log.sh "ddns.sh" ">>> dynamic dns end <<<"
     exit
   fi
 
   if [ -z "$DOMAIN" ]; then
     /bin/bash log.sh "ddns.sh" "域名 不能为空"
+    /bin/bash log.sh "ddns.sh" ">>> dynamic dns end <<<"
     exit
   fi
 }
