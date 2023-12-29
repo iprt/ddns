@@ -106,7 +106,7 @@ windows 使用 `git-bash` 测试可以使用 `taobao` 策略
 
 ## 五、一些其他配置
 
-`nginx` 配置获取 `/ddns` 获取 IP
+`nginx` 配置 `location` `/ddns` 获取 IP
 
 ```nginx configuration
     location = /ddns {
