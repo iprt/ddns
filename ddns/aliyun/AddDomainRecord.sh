@@ -12,8 +12,8 @@ ip_cache=$3
 
 # 验证方法: 删除所有DNS记录
 function AddDomainRecord() {
-  /bin/bash ../log.sh "AddDomainRecord" "========== AddDomainRecord =========="
-  /bin/bash ../log.sh "AddDomainRecord" "aliyun alidns AddDomainRecord --DomainName $DOMAIN --RR $RR --Type A --Value $ip_cache"
+  /bin/bash ../../log.sh "AddDomainRecord" "========== AddDomainRecord =========="
+  /bin/bash ../../log.sh "AddDomainRecord" "aliyun alidns AddDomainRecord --DomainName $DOMAIN --RR $RR --Type A --Value $ip_cache"
 
   # shellcheck disable=SC2086
   aliyun alidns AddDomainRecord --DomainName $DOMAIN --RR $RR --Type A --Value $ip_cache
