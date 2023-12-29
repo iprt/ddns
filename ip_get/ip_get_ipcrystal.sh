@@ -6,9 +6,7 @@ SHELL_FOLDER=$(
 )
 cd "$SHELL_FOLDER"
 
-function log() {
-  /bin/bash ../log.sh $1 $2
-}
+source ../commons/logger.sh
 
 function check_port() {
   local SERVER=$1
