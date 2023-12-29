@@ -6,7 +6,11 @@ SHELL_FOLDER=$(
 )
 cd "$SHELL_FOLDER"
 
-ip_get_cache="ip_get.cache"
+# ip 获取策略
+# shellcheck disable=SC2034
+ip_get_policy=$(cat ip_get/ip_get_policy)
+
+ip_get_cache="ip_get/ip_get.cache"
 ip_cache="ip.cache"
 
 function cache_refresh() {
@@ -16,7 +20,9 @@ function cache_refresh() {
     echo "127.0.0.1" >"$ip_cache"
   fi
 
-  /bin/bash ip_get.sh
+  /bin/bash log.sh "cache_refresh" "当前的IP获取策略为: $ip_get_policy"
+
+  /bin/bash "ip_get/ip_get_$ip_get_policy.sh"
 
   if [ ! -f $ip_get_cache ]; then
     /bin/bash log.sh "cache_refresh" "$ip_get_cache 临时缓存文件不存在，确保 ip_get.sh 生成 $ip_get_cache 文件"

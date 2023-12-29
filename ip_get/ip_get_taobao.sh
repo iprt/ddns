@@ -1,4 +1,11 @@
 #!/bin/bash
+# shellcheck disable=SC2164
+SHELL_FOLDER=$(
+  cd "$(dirname "$0")"
+  pwd
+)
+cd "$SHELL_FOLDER"
+
 # 通过淘宝获取IP
 # 返回值类似 "ipCallback({ip:"127.0.0.1"})"
 # shellcheck disable=SC2034
@@ -6,7 +13,5 @@ taobao_get_ip=$(curl https://www.taobao.com/help/getip.php)
 
 ip=$(echo "$taobao_get_ip" | sed -n 's/.*ip:"\([^"]*\).*/\1/p')
 
-# 如果使用，按照约定
-#echo "$ip" >ip_get.cache
-
-echo "$ip"
+# 约定: 写入临时缓存 ip_get.cache
+echo "$ip" >ip_get.cache
