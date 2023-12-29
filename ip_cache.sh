@@ -8,7 +8,17 @@ cd "$SHELL_FOLDER"
 
 # ip 获取策略
 # shellcheck disable=SC2034
-ip_get_policy=$(cat ip_get/ip_get_policy)
+ip_get_policy=$(cat config.json | jq -r ".ip_get_policy")
+
+if [ -z "$ip_get_policy" ]; then
+  /bin/bash log.sh "config" "IP 获取策略配置不能为空"
+  exit 1
+elif [ ! -f "ip_get/ip_get_$ip_get_policy.sh" ]; then
+  /bin/bash log.sh "config" "IP 获取策略 指定的的文件不存在: ip_get/ip_get_$ip_get_policy.sh"
+  exit 1
+else
+  /bin/bash log.sh "config" "IP 获取策略 配置成功"
+fi
 
 ip_get_cache="ip_get/ip_get.cache"
 ip_cache="ip.cache"

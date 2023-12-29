@@ -9,7 +9,7 @@ cd "$SHELL_FOLDER"
 # 通过淘宝获取IP
 # 返回值类似 "ipCallback({ip:"127.0.0.1"})"
 # shellcheck disable=SC2034
-taobao_get_ip=$(curl https://www.taobao.com/help/getip.php)
+taobao_get_ip=$(curl -k https://www.taobao.com/help/getip.php)
 
 ip=$(echo "$taobao_get_ip" | sed -n 's/.*ip:"\([^"]*\).*/\1/p')
 

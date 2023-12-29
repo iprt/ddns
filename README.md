@@ -81,15 +81,14 @@ crontab -e
 
 ## 三、自定义 ip 获取策略
 
-> 参考 [ip_get](ip_get) 文件夹
+> 参考 [ip_get](ip_get) 文件夹，配置文件 [`config.json`](config.json) 中配置
 
 windows 使用 `git-bash` 测试可以使用 `taobao` 策略
 
 **约定:**
 
 1. IP获取策略需要将获取到的`公网ip（类似 127.0.0.1 ）`写入到`ip_get.cache`文件中，`ip_cache.sh`会读取、校验、删除
-2. [ip_get_policy](ip_get/ip_get_policy) 文件 存储IP获取的策略
-3. 自编写策略文件名: `ip_get_<自编写策略>.sh`
+2. 自编写策略文件名: `ip_get_<自编写策略>.sh`
 
 个人实现
 
