@@ -12,8 +12,8 @@ function log() {
   local log_file=ddns.log
   local current_time
   current_time=$(date +"%Y-%m-%d %H:%M:%S")
-  echo "$current_time - [ $log_remark ] $log_message"
-  echo "$current_time - [ $log_remark ] $log_message" >>"$log_file"
+  echo -e "$current_time - [ $log_remark ] $log_message"
+  echo -e "$current_time - [ $log_remark ] $log_message" >>"$log_file"
 }
 
 remark=$1
