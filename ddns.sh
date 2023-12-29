@@ -40,6 +40,6 @@ ip_cache=$(cat ip.cache)
 
 # aliyun-cli 操作 dns记录
 # shellcheck disable=SC2086
-/bin/bash ddns_aliyun-cli.sh $RR $DOMAIN $ip_cache
+/bin/bash ddns_aliyun.sh $RR $DOMAIN $ip_cache
 
 /bin/bash log.sh "ddns.sh" ">>> dynamic dns end <<<"
