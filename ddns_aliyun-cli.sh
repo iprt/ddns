@@ -20,6 +20,8 @@ function validate_cli() {
   fi
 }
 
+validate_cli
+
 # 注意 方法内部不能加echo 加了注释输出的内容 jq 读取有问题
 function DescribeSubDomainRecords() {
   # shellcheck disable=SC2086
