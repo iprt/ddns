@@ -13,10 +13,10 @@ ip_cache=$3
 function validate_cli() {
   default_valid_status=$(aliyun configure list | grep default | awk -F '|' '{print $3}' | xargs)
   if [ "$default_valid_status" == "Valid" ]; then
-    /bin/bash log.sh "validate_cli" "阿里云CLI 配置失败"
-    exit
+    /bin/bash log.sh "validate_cli" "阿里云CLI 配置成功 default_valid_status: $default_valid_status"
   else
-    /bin/bash log.sh "validate_cli" "阿里云CLI 配置成功"
+    /bin/bash log.sh "validate_cli" "阿里云CLI 配置失败 default_valid_status: $default_valid_status"
+    exit
   fi
 }
 
