@@ -6,22 +6,26 @@ SHELL_FOLDER=$(
 )
 cd "$SHELL_FOLDER"
 
+function log() {
+  /bin/bash log.sh $1 $2
+}
+
 # 定义全局变量
 RR=$1
 DOMAIN=$2
 
-/bin/bash log.sh "ddns.sh" ">>> dynamic dns start <<<"
+log "ddns.sh" ">>> dynamic dns start <<<"
 
 function verify_param() {
   if [ -z "$RR" ]; then
-    /bin/bash log.sh "ddns.sh" "主机记录 不能为空"
-    /bin/bash log.sh "ddns.sh" ">>> dynamic dns end <<<"
+    log "ddns.sh" "主机记录 不能为空"
+    log "ddns.sh" ">>> dynamic dns end <<<"
     exit
   fi
 
   if [ -z "$DOMAIN" ]; then
-    /bin/bash log.sh "ddns.sh" "域名 不能为空"
-    /bin/bash log.sh "ddns.sh" ">>> dynamic dns end <<<"
+    log "ddns.sh" "域名 不能为空"
+    log "ddns.sh" ">>> dynamic dns end <<<"
     exit
   fi
 }
@@ -34,7 +38,7 @@ ip_cache_status=$?
 
 # shellcheck disable=SC2086
 if [ $ip_cache_status -ne 0 ]; then
-  /bin/bash log.sh "ddns.sh" "ip_cache.sh 执行失败，退出"
+  log "ddns.sh" "ip_cache.sh 执行失败，退出"
   exit
 fi
 
@@ -44,4 +48,4 @@ ip_cache=$(cat ip.cache)
 # shellcheck disable=SC2086
 /bin/bash ddns/ddns.sh $RR $DOMAIN $ip_cache
 
-/bin/bash log.sh "ddns.sh" ">>> dynamic dns end <<<"
+log "ddns.sh" ">>> dynamic dns end <<<"

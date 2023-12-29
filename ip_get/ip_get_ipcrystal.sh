@@ -6,6 +6,10 @@ SHELL_FOLDER=$(
 )
 cd "$SHELL_FOLDER"
 
+function log() {
+  /bin/bash ../log.sh $1 $2
+}
+
 function check_port() {
   local SERVER=$1
   local PORT=$2
@@ -17,11 +21,11 @@ function check_port() {
 
   # shellcheck disable=SC2086
   if [ $status -ne 0 ]; then
-    /bin/bash ../log.sh "check_port" "Connection to $SERVER on port $PORT failed"
-    /bin/bash ../log.sh "check_port" "exit"
+    log "check_port" "Connection to $SERVER on port $PORT failed"
+    log "check_port" "exit"
     exit 1
   else
-    /bin/bash ../log.sh "check_port" "Connection to $SERVER on port $PORT succeeded"
+    log "check_port" "Connection to $SERVER on port $PORT succeeded"
   fi
 }
 

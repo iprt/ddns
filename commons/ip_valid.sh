@@ -1,4 +1,14 @@
 #!/bin/bash
+# shellcheck disable=SC2164
+SHELL_FOLDER=$(
+  cd "$(dirname "$0")"
+  pwd
+)
+cd "$SHELL_FOLDER"
+
+function log() {
+  /bin/bash ../log.sh $1 $2
+}
 
 function valid_ip() {
   local ip=$1
@@ -22,9 +32,9 @@ function valid_ip() {
 
 ip_address="$1"
 if valid_ip "$ip_address"; then
-  /bin/bash ../log.sh "valid_ip" "$ip_address is a valid IP address."
+  log "valid_ip" "$ip_address is a valid IP address."
   exit 0
 else
-  /bin/bash ../log.sh "valid_ip" "$ip_address is not a valid IP address."
+  log "valid_ip" "$ip_address is not a valid IP address."
   exit 1
 fi

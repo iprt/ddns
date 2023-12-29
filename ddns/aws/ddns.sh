@@ -6,4 +6,8 @@ SHELL_FOLDER=$(
 )
 cd "$SHELL_FOLDER"
 
-/bin/bash ../../log.sh "aws" "todo"
+function log() {
+  /bin/bash ../../log.sh $1 $2
+}
+
+log "aws" "todo"
