@@ -7,7 +7,7 @@ SHELL_FOLDER=$(
 cd "$SHELL_FOLDER"
 
 # ip 获取策略
-# shellcheck disable=SC2034
+# shellcheck disable=SC2002
 ip_get_policy=$(cat config.json | jq -r ".ip_get_policy")
 
 if [ -z "$ip_get_policy" ]; then
@@ -44,7 +44,7 @@ function cache_refresh() {
   local public_ip=$(cat $ip_get_cache)
 
   # 验证 公网IP是否正确
-  /bin/bash ip_valid.sh "$public_ip"
+  /bin/bash commons/ip_valid.sh "$public_ip"
   ip_valid_status=$?
 
   /bin/bash log.sh "cache_refresh" "ip_valid_status $ip_valid_status"

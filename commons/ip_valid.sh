@@ -22,9 +22,9 @@ function valid_ip() {
 
 ip_address="$1"
 if valid_ip "$ip_address"; then
-  /bin/bash log.sh "valid_ip" "$ip_address is a valid IP address."
+  /bin/bash ../log.sh "valid_ip" "$ip_address is a valid IP address."
   exit 0
 else
-  /bin/bash log.sh "valid_ip" "$ip_address is not a valid IP address."
+  /bin/bash ../log.sh "valid_ip" "$ip_address is not a valid IP address."
   exit 1
 fi
