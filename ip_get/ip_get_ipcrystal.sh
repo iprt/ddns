@@ -17,11 +17,11 @@ function check_port() {
 
   # shellcheck disable=SC2086
   if [ $status -ne 0 ]; then
-    /bin/bash log.sh "check_port" "Connection to $SERVER on port $PORT failed"
-    /bin/bash log.sh "check_port" "exit"
+    /bin/bash ../log.sh "check_port" "Connection to $SERVER on port $PORT failed"
+    /bin/bash ../log.sh "check_port" "exit"
     exit 1
   else
-    /bin/bash log.sh "check_port" "Connection to $SERVER on port $PORT succeeded"
+    /bin/bash ../log.sh "check_port" "Connection to $SERVER on port $PORT succeeded"
   fi
 }
 
