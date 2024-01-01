@@ -31,4 +31,4 @@ function check_port() {
 check_port ipcrystal.com 443
 
 # 约定: 写入临时缓存 ip_get.cache
-curl -k https://ipcrystal.com/ddns >ip_get.cache
+curl -L -k https://ipcrystal.com/ddns >ip_get.cache
