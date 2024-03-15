@@ -1,9 +1,6 @@
 #!/bin/bash
-# shellcheck disable=SC2164
-SHELL_FOLDER=$(
-  cd "$(dirname "$0")"
-  pwd
-)
+# shellcheck disable=SC2164 disable=SC2002 disable=SC2155
+SHELL_FOLDER=$(cd "$(dirname "$0")" && pwd)
 cd "$SHELL_FOLDER"
 
 function log() {
@@ -19,7 +16,6 @@ function log() {
 }
 
 # ip 获取策略
-# shellcheck disable=SC2002
 ip_get_policy=$(cat config.json | jq -r ".ip_get_policy")
 
 if [ -z "$ip_get_policy" ]; then
@@ -52,7 +48,6 @@ function cache_refresh() {
   fi
 
   # 获取公网IP 从 ip_get.cache 中获取
-  # shellcheck disable=SC2155
   local public_ip=$(cat $ip_get_cache)
 
   # 验证 公网IP是否正确
@@ -61,7 +56,6 @@ function cache_refresh() {
 
   log "cache_refresh" "ip_valid_status $ip_valid_status"
 
-  # shellcheck disable=SC2086
   if [ $ip_valid_status -ne 0 ]; then
     # 公网IP验证失败
     exit 1
@@ -70,7 +64,6 @@ function cache_refresh() {
     rm -rf $ip_get_cache
   fi
 
-  # shellcheck disable=SC2155
   local local_ip_cache=$(cat $ip_cache)
 
   if [ "init" == "$local_ip_cache" ]; then

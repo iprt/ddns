@@ -1,9 +1,6 @@
 #!/bin/bash
-# shellcheck disable=SC2164
-SHELL_FOLDER=$(
-  cd "$(dirname "$0")"
-  pwd
-)
+# shellcheck disable=SC2164  disable=SC2002
+SHELL_FOLDER=$(cd "$(dirname "$0")" && pwd)
 cd "$SHELL_FOLDER"
 
 source ../commons/logger.sh
@@ -13,7 +10,6 @@ RR=$1
 DOMAIN=$2
 ip_cache=$3
 
-# shellcheck disable=SC2034
 ddns_policy=$(cat ../config.json | jq -r ".ddns_policy")
 
 if [ -z "$ddns_policy" ]; then

@@ -1,9 +1,6 @@
 #!/bin/bash
 # shellcheck disable=SC2164
-SHELL_FOLDER=$(
-  cd "$(dirname "$0")"
-  pwd
-)
+SHELL_FOLDER=$(cd "$(dirname "$0")" && pwd)
 cd "$SHELL_FOLDER"
 
 source ../commons/logger.sh
@@ -17,7 +14,6 @@ function check_port() {
   nc -w $timeout -z "$SERVER" "$PORT"
   local status=$?
 
-  # shellcheck disable=SC2086
   if [ $status -ne 0 ]; then
     log "check_port" "Connection to $SERVER on port $PORT failed"
     log "check_port" "exit"

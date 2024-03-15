@@ -1,9 +1,6 @@
 #!/bin/bash
-# shellcheck disable=SC2164
-SHELL_FOLDER=$(
-  cd "$(dirname "$0")"
-  pwd
-)
+# shellcheck disable=SC2164 disable=SC2086 disable=SC2155
+SHELL_FOLDER=$(cd "$(dirname "$0")" && pwd)
 cd "$SHELL_FOLDER"
 
 source ../../commons/commons/logger.sh
@@ -16,9 +13,7 @@ ip_cache=$3
 function UpdateDomainRecord() {
   log "UpdateDomainRecord" "========== UpdateDomainRecord =========="
 
-  # shellcheck disable=SC2086
-  # shellcheck disable=SC2155
-  local record_value=$(/bin/bash DescribeSubDomainRecords.sh $RR $DOMAIN | jq -r ".DomainRecords.Record[0].Value")
+  local record_value=$(bash DescribeSubDomainRecords.sh $RR $DOMAIN | jq -r ".DomainRecords.Record[0].Value")
 
   if [ "$record_value" == "$ip_cache" ]; then
     log "UpdateDomainRecord" "本地IP缓存与远程DNS解析相同，不需要修改"
@@ -29,7 +24,6 @@ function UpdateDomainRecord() {
 
     log "UpdateDomainRecord" "aliyun alidns UpdateDomainRecord --RR $RR --RecordId $local_RecordId --Type A --Value $ip_cache"
 
-    # shellcheck disable=SC2086
     aliyun alidns UpdateDomainRecord --RR $RR --RecordId $local_RecordId --Type A --Value $ip_cache
   fi
 }

@@ -1,9 +1,7 @@
 #!/bin/bash
+# shellcheck disable=SC2164 disable=SC2034 disable=SC2086
 # shellcheck disable=SC2164
-SHELL_FOLDER=$(
-  cd "$(dirname "$0")"
-  pwd
-)
+SHELL_FOLDER=$(cd "$(dirname "$0")" && pwd)
 cd "$SHELL_FOLDER"
 
 function log() {
@@ -40,11 +38,9 @@ function verify_param() {
 
 verify_param
 
-# shellcheck disable=SC2034
 /bin/bash ip_cache.sh
 ip_cache_status=$?
 
-# shellcheck disable=SC2086
 if [ $ip_cache_status -ne 0 ]; then
   log "ddns.sh" "ip_cache.sh 执行失败，退出"
   exit
