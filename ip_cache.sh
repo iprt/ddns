@@ -12,8 +12,19 @@ function log() {
   if [ -z "$msg" ]; then
     msg="empty msg by log default"
   fi
-  /bin/bash log.sh "$remark" "$msg"
+  bash log.sh "$remark" "$msg"
 }
+
+function command_exists() {
+  type "$1" &>/dev/null
+}
+
+if command_exists jq; then
+  log "command_exists" "jq 命令存在"
+else
+  log "command_exists" "jq 命令不存在,需要安装jq"
+  exit 1
+fi
 
 # ip 获取策略
 ip_get_policy=$(cat config.json | jq -r ".ip_get_policy")

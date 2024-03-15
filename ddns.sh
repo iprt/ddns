@@ -12,7 +12,7 @@ function log() {
   if [ -z "$msg" ]; then
     msg="empty msg by log default"
   fi
-  /bin/bash log.sh "$remark" "$msg"
+  bash log.sh "$remark" "$msg"
 }
 
 # 定义全局变量
