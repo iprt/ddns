@@ -61,7 +61,7 @@ Configure Done!!!
 例子: 修改 `test.example.com` , `test` 为dns记录 ，`example.com` 为域名
 
 ```shell
-/bin/bash /path_to_ddns/ddns.sh test example.com 
+bash /path_to_ddns/ddns.sh test example.com 
 ```
 
 - 第一个参数 `test`: DNS记录

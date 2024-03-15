@@ -23,4 +23,4 @@ else
 fi
 
 # shellcheck disable=SC2086
-/bin/bash $ddns_policy/ddns.sh $RR $DOMAIN $ip_cache
+bash $ddns_policy/ddns.sh $RR $DOMAIN $ip_cache

@@ -1,6 +1,5 @@
 #!/bin/bash
-# shellcheck disable=SC2164 disable=SC2034 disable=SC2086
-# shellcheck disable=SC2164
+# shellcheck disable=SC2164 disable=SC2034 disable=SC2086 disable=SC2086
 SHELL_FOLDER=$(cd "$(dirname "$0")" && pwd)
 cd "$SHELL_FOLDER"
 
@@ -38,7 +37,7 @@ function verify_param() {
 
 verify_param
 
-/bin/bash ip_cache.sh
+bash ip_cache.sh
 ip_cache_status=$?
 
 if [ $ip_cache_status -ne 0 ]; then
@@ -49,7 +48,6 @@ fi
 ip_cache=$(cat ip.cache)
 
 # aliyun-cli 操作 dns记录
-# shellcheck disable=SC2086
-/bin/bash ddns/ddns.sh $RR $DOMAIN $ip_cache
+bash ddns/ddns.sh $RR $DOMAIN $ip_cache
 
 log "ddns.sh" ">>> dynamic dns end <<<"
