@@ -1,12 +1,26 @@
 # dynamic dns
 
-基于阿里云
+基于阿里云CLI
 
 解析IPV4
 
+<!-- TOC -->
+
+* [dynamic dns](#dynamic-dns)
+    * [一、准备条件](#一准备条件)
+        * [1.1 下载项目](#11-下载项目)
+        * [1.2 其他需要的命令](#12-其他需要的命令)
+        * [1.3 aliyun-cli 配置](#13-aliyun-cli-配置)
+    * [二、使用说明](#二使用说明)
+    * [三、自定义 ip 获取策略](#三自定义-ip-获取策略)
+    * [四、脚本生成的文件](#四脚本生成的文件)
+    * [五、一些其他配置](#五一些其他配置)
+
+<!-- TOC -->
+
 ## 一、准备条件
 
-### 1.1 `git clone`
+### 1.1 下载项目
 
 ```shell
 git clone https://github.com/iprt/ddns
@@ -58,14 +72,17 @@ Configure Done!!!
 
 ## 二、使用说明
 
-例子: 修改 `test.example.com` , `test` 为dns记录 ，`example.com` 为域名
+**例:** 修改 `test.example.com` 的解析记录(A)为当前网络的出口IP(v4)
+
+- `test` 为dns记录
+- `example.com` 为个人持有的域名
 
 ```shell
 bash /path_to_ddns/ddns.sh test example.com 
 ```
 
-- 第一个参数 `test`: DNS记录
-- 第二个参数 `example.com`: 域名
+- 参数一: `test`: DNS记录
+- 参数二: `example.com`: 个人持有的域名
 
 **定时任务**
 
@@ -92,7 +109,7 @@ windows 使用 `git-bash` 测试可以使用 `taobao` 策略
 
 个人实现
 
-- [ip_get_ipcrystal.sh](ip_get/ip_get_ipcrystal.sh) 通过 `https://ipcrystal.com/ddns` 获取公网IP
+- [ip_get_ipcrystal.sh](ip_get/ip_get_ipcrystal.sh) 通过 `https://www.ipcrystal.com/ddns` 获取公网IP
 - [ip_get_taobao.sh](ip_get/ip_get_taobao.sh) 通过 `https://www.taobao.com/help/getip.php` 获取公网IP
 
 ## 四、脚本生成的文件
