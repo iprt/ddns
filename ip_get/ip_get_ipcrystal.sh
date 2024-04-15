@@ -24,7 +24,7 @@ function check_port() {
 }
 
 # 测试需要获取ip的服务器端口是否打开
-check_port ipcrystal.com 443
+check_port www.ipcrystal.com 443
 
 # 约定: 写入临时缓存 ip_get.cache
-curl -L -k https://ipcrystal.com/ddns >ip_get.cache
+curl -L -k https://www.ipcrystal.com/ddns >ip_get.cache
