@@ -2,6 +2,8 @@
 # shellcheck disable=SC2164
 PROJECT_PATH=$(cd "$(dirname "$0")" && pwd)
 
+echo "PROJECT_PATH=$PROJECT_PATH"
+
 function log() {
   local log_remark="$1"
   local log_message="$2"
