@@ -3,7 +3,7 @@
 SHELL_FOLDER=$(cd "$(dirname "$0")" && pwd)
 cd "$SHELL_FOLDER"
 
-source ../../commons/commons/logger.sh
+source ../../env_func.sh
 
 RR=$1
 DOMAIN=$2

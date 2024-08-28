@@ -3,7 +3,7 @@
 SHELL_FOLDER=$(cd "$(dirname "$0")" && pwd)
 cd "$SHELL_FOLDER"
 
-source ../commons/logger.sh
+source ../env_func.sh
 
 # 定义全局变量
 RR=$1

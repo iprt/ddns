@@ -3,28 +3,7 @@
 SHELL_FOLDER=$(cd "$(dirname "$0")" && pwd)
 cd "$SHELL_FOLDER"
 
-function log() {
-  local remark=$1
-  local msg=$2
-  if [ -z "$remark" ]; then
-    remark="default_remark"
-  fi
-  if [ -z "$msg" ]; then
-    msg="empty msg by log default"
-  fi
-  bash log.sh "$remark" "$msg"
-}
-
-function command_exists() {
-  type "$1" &>/dev/null
-}
-
-if command_exists jq; then
-  log "command_exists" "jq 命令存在"
-else
-  log "command_exists" "jq 命令不存在,需要安装jq"
-  exit 1
-fi
+source ./env_func.sh
 
 # ip 获取策略
 ip_get_policy=$(cat config.json | jq -r ".ip_get_policy")
@@ -51,7 +30,7 @@ function cache_refresh() {
 
   log "cache_refresh" "当前的IP获取策略为: $ip_get_policy"
 
-  /bin/bash "ip_get/ip_get_$ip_get_policy.sh"
+  bash "ip_get/ip_get_$ip_get_policy.sh"
 
   if [ ! -f $ip_get_cache ]; then
     log "cache_refresh" "$ip_get_cache 临时缓存文件不存在，确保 ip_get.sh 生成 $ip_get_cache 文件"
@@ -62,17 +41,12 @@ function cache_refresh() {
   local public_ip=$(cat $ip_get_cache)
 
   # 验证 公网IP是否正确
-  /bin/bash commons/ip_valid.sh "$public_ip"
-  ip_valid_status=$?
-
-  log "cache_refresh" "ip_valid_status $ip_valid_status"
-
-  if [ $ip_valid_status -ne 0 ]; then
-    # 公网IP验证失败
-    exit 1
-  else
+  if validate_ipv4 "$public_ip"; then
     log "cache_refresh" "清理$ip_get_cache: rm -rf $ip_get_cache"
     rm -rf $ip_get_cache
+  else
+    log "validate_ipv4" "公网IP验证失败"
+    exit 1
   fi
 
   local local_ip_cache=$(cat $ip_cache)

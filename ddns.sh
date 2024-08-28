@@ -3,34 +3,29 @@
 SHELL_FOLDER=$(cd "$(dirname "$0")" && pwd)
 cd "$SHELL_FOLDER"
 
-function log() {
-  local remark=$1
-  local msg=$2
-  if [ -z "$remark" ]; then
-    remark="default_remark"
-  fi
-  if [ -z "$msg" ]; then
-    msg="empty msg by log default"
-  fi
-  bash log.sh "$remark" "$msg"
-}
+source ./env_func.sh
 
 # 定义全局变量
 RR=$1
 DOMAIN=$2
 
-log "ddns.sh" ">>> dynamic dns start <<<"
+function ddns_start() {
+  log "ddns.sh" ">>> dynamic dns start <<<"
+}
+function ddns_end() {
+  log "ddns.sh" ">>> dynamic dns end <<<"
+}
 
 function verify_param() {
   if [ -z "$RR" ]; then
     log "ddns.sh" "主机记录 不能为空"
-    log "ddns.sh" ">>> dynamic dns end <<<"
+    ddns_end
     exit
   fi
 
   if [ -z "$DOMAIN" ]; then
     log "ddns.sh" "域名 不能为空"
-    log "ddns.sh" ">>> dynamic dns end <<<"
+    ddns_end
     exit
   fi
 }
@@ -42,6 +37,7 @@ ip_cache_status=$?
 
 if [ $ip_cache_status -ne 0 ]; then
   log "ddns.sh" "ip_cache.sh 执行失败，退出"
+  ddns_end
   exit
 fi
 
