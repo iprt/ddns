@@ -1,8 +1,6 @@
 #!/bin/bash
 # shellcheck disable=SC2164
-PROJECT_PATH=$(cd "$(dirname "$0")" && pwd)
-
-echo "PROJECT_PATH=$PROJECT_PATH"
+PROJECT_PATH="/opt/ddns"
 
 function log() {
   local log_remark="$1"
