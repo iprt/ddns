@@ -42,22 +42,22 @@ function cache_refresh() {
 
   # 验证 公网IP是否正确
   if validate_ipv4 "$public_ip"; then
-    log "cache_refresh" "清理$ip_get_cache: rm -rf $ip_get_cache"
+    log "cache_refresh" "公网IP $public_ip | 清理$ip_get_cache: rm -rf $ip_get_cache"
     rm -rf $ip_get_cache
   else
     log "validate_ipv4" "公网IP验证失败"
     exit 1
   fi
 
-  local local_ip_cache=$(cat $ip_cache)
+  local ip_local_cache=$(cat $ip_cache)
 
-  if [ "init" == "$local_ip_cache" ]; then
+  if [ "init" == "$ip_local_cache" ]; then
     log "cache_refresh" "ip cache 初始化，第一次写入$ip_cache"
     echo "$public_ip" >$ip_cache
-  elif [ "$local_ip_cache" == "$public_ip" ]; then
+  elif [ "$ip_local_cache" == "$public_ip" ]; then
     log "cache_refresh" "缓存的IP与当前的IP相同，ddns 执行时可选择重新校验"
   else
-    log "cache_refresh" "重写本地IP缓存，之前的IP缓存为: $local_ip_cache,新的缓存为: $public_ip"
+    log "cache_refresh" "重写本地IP缓存，之前的IP缓存为: $ip_local_cache,新的缓存为: $public_ip"
     echo "$public_ip" >$ip_cache
   fi
 
