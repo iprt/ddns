@@ -12,7 +12,7 @@ DOMAIN=$2
 function DeleteSubDomainRecords() {
   log "DeleteSubDomainRecords" "========== DeleteSubDomainRecords =========="
 
-  for RecordId in $(/bin/bash DescribeSubDomainRecords.sh $RR $DOMAIN | jq -r ".DomainRecords.Record[].RecordId"); do
+  for RecordId in $(bash DescribeSubDomainRecords.sh $RR $DOMAIN | jq -r ".DomainRecords.Record[].RecordId"); do
     log "DeleteSubDomainRecords" "delete RecordId : RecordId=$RecordId"
   done
 

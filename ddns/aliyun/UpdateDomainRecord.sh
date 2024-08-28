@@ -19,7 +19,7 @@ function UpdateDomainRecord() {
     log "UpdateDomainRecord" "本地IP缓存与远程DNS解析相同，不需要修改"
   else
     log "UpdateDomainRecord" "本地IP缓存与远程DNS解析不同，需要修改"
-    # shellcheck disable=SC2155
+
     local local_RecordId=$(DescribeSubDomainRecords | jq -r ".DomainRecords.Record[0].RecordId")
 
     log "UpdateDomainRecord" "aliyun alidns UpdateDomainRecord --RR $RR --RecordId $local_RecordId --Type A --Value $ip_cache"
