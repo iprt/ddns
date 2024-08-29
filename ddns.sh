@@ -16,6 +16,18 @@ function ddns_end() {
   log "ddns.sh" ">>> dynamic dns end <<<"
 }
 
+if ! command_exists jq; then
+  log "prepare" "jq 命令不存在"
+  ddns_end
+  exit
+fi
+
+if ! command_exists nc; then
+  log "prepare" "nc 命令不存在"
+  ddns_end
+  exit
+fi
+
 function verify_param() {
   if [ -z "$RR" ]; then
     log "ddns.sh" "主机记录 不能为空"
